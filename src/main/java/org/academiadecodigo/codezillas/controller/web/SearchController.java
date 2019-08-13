@@ -1,8 +1,6 @@
 package org.academiadecodigo.codezillas.controller.web;
 
 import org.academiadecodigo.codezillas.command.SearchDto;
-import org.academiadecodigo.codezillas.converters.SearchDetailsDtoToSearchDetails;
-import org.academiadecodigo.codezillas.persistence.model.SearchDetails;
 import org.academiadecodigo.codezillas.services.SearchService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -27,14 +25,21 @@ public class SearchController {
         this.searchService = searchService;
     }
 
-    @RequestMapping(method = RequestMethod.POST, path = {"/"})
-    public String findDestination(@Valid @ModelAttribute ("searchDetails") SearchDto searchDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    @RequestMapping(method = RequestMethod.GET, path = "")
+    public String showSearch(){
+        return "index";
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "")
+    public String findDestination(@Valid @ModelAttribute ("searchDto") SearchDto searchDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("lastAction", "Make a new search");
             return "redirect:/search/";
         }
 
-        return searchService.makeRequest(searchDto);
+       // return searchService.makeRequest(searchDto);
+        return null;
     }
+
 }
