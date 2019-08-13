@@ -1,22 +1,35 @@
 package rest;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+import org.academiadecodigo.codezillas.controller.rest.FlightAPI;
 import org.academiadecodigo.codezillas.controller.rest.FlightPOJO;
-import org.academiadecodigo.codezillas.controller.rest.pojos.LocationDTO;
+import org.academiadecodigo.codezillas.controller.rest.DTO.LocationDTO;
+import org.academiadecodigo.codezillas.controller.rest.DTO.QuoteDTO;
 import org.academiadecodigo.codezillas.controller.rest.pojos.RESTUtils;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.*;
 
 public class FlightTEST {
+
     public static void main(String[] args) {
+        FlightAPI api = new FlightAPI();
+
+        Response response = api.getResponse();
+        ObjectMapper mapper = new ObjectMapper();
+        FlightPOJO pojo = api.getPojo(api.getResponse());
+
+        QuoteDTO dto = api.getQuotes(api.getResponse());
+        List<LocationDTO> list = api.getDestinationList(api.getResponse());
+
+    }
+
+    public static void garbage(){
 
         OkHttpClient client = new OkHttpClient();
         ObjectMapper mapper = new ObjectMapper();
@@ -24,8 +37,8 @@ public class FlightTEST {
 
                 .url(RESTUtils.SKYSCANNER_BASE + "NYC/OPO/2019-09-03?inboundpartialdate=2019-12-01")
                 .get()
-                .addHeader("x-rapidapi-host", "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com")
-                .addHeader("x-rapidapi-key", "77cac05b57mshd89bf2e6859e99ap1be1f4jsn13a25e163fc8")
+                .addHeader(RESTUtils.SKYSCANNER_HOSTHEADER, RESTUtils.SKYSCANNER_HOSTVALUE)
+                .addHeader(RESTUtils.SKYSCANNER_KEYHEADER, RESTUtils.SKYSCANNER_KEY)
                 .build();
 
         try {
@@ -35,7 +48,6 @@ public class FlightTEST {
 
             LinkedList<LocationDTO> locationList = new LinkedList<>();
             LocationDTO dto;
-            LocationDTO dto2;
             System.out.println(pojo.toString());
             System.out.println(pojo.getPlaces().toString() + "\n");
             Iterator<JsonNode> iterator = pojo.getPlaces().iterator();
@@ -52,6 +64,5 @@ public class FlightTEST {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }
