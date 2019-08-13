@@ -38,6 +38,7 @@ public class SearchController {
             return "redirect:/search/";
         }
 
+        //return searchService.searchDestinations(searchDto);
        // return searchService.makeRequest(searchDto);
         return null;
     }

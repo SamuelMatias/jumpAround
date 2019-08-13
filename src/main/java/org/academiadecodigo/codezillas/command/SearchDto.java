@@ -5,8 +5,6 @@ import java.util.Date;
 
 public class SearchDto {
 
-    @NotBlank(message = "Country is mandatory")
-    private String country;
     @NotBlank(message = "Jumps is mandatory")
     private int jumps;
     @NotBlank(message = "Origin is mandatory")
@@ -15,14 +13,6 @@ public class SearchDto {
     private Date checkIn;
     @NotBlank(message = "CheckOut is mandatory")
     private Date checkOut;
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
 
     public int getJumps() {
         return jumps;
