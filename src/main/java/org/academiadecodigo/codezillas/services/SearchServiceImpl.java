@@ -1,0 +1,34 @@
+package org.academiadecodigo.codezillas.services;
+
+import org.academiadecodigo.codezillas.persistence.model.Location;
+
+import java.util.Date;
+import java.util.List;
+
+public class SearchServiceImpl implements SearchService {
+
+    private IataConverter iataConverter;
+    //IATA Code - Origin location
+
+    //Budget
+
+    @Override
+    public List<Location> searchDestinations(/*SearchDetails searchDetails*/Location origin, Location destination, Date checkin, Date checkout) {
+
+        convertSearchDetails(searchDetails);
+
+        
+
+        return null;
+    }
+
+    private String convertSearchDetails(SearchDetails searchDetails){
+
+        String country = SearchDetails.getLocation().getCountry;
+        String city = SearchDetails.getLocation().getCity;
+
+        return iataConverter.convert(country, city);
+    }
+
+    private String
+}
