@@ -9,7 +9,7 @@ public class LocationtoIataConverter {
 
     public String converter(String location) {
         for (int i = 0; i < airports.length ; i++) {
-            if(airports[i].getLocationServed() == location){
+            if(airports[i].getLocationServed().equals(location)){
                 return airports[i].name();
             }
         }
