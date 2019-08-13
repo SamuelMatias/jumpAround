@@ -1,5 +1,6 @@
 package org.academiadecodigo.codezillas.services;
 
+import org.academiadecodigo.codezillas.command.SearchDto;
 import org.academiadecodigo.codezillas.persistence.model.Location;
 import org.academiadecodigo.codezillas.persistence.model.SearchDetails;
 
@@ -14,7 +15,7 @@ public class SearchServiceImpl implements SearchService {
     //Budget
 
     @Override
-    public List<Location> searchDestinations(/*SearchDetails searchDetails*/Location origin, Location destination, Date checkin, Date checkout) {
+    public List<Location> searchDestinations(SearchDto searchDetails) {
 
         convertSearchDetails(searchDetails);
 
@@ -23,13 +24,9 @@ public class SearchServiceImpl implements SearchService {
         return null; // return converted alex result
     }
 
-    private String convertSearchDetails(SearchDetails searchDetails){
+    private String convertSearchDetails(SearchDto searchDetails){
 
-        String country = SearchDetails.getLocation().getCountry;
-        String city = SearchDetails.getLocation().getCity;
-
-        return iataConverter.convert(country, city);
+        String origin = searchDetails.getOrigin();
+        return iataConverter.convert(origin);
     }
-
-    private String
 }
