@@ -13,6 +13,9 @@ public class SearchDto {
     private Date checkIn;
     @NotBlank(message = "CheckOut is mandatory")
     private Date checkOut;
+    @NotBlank(message = "Budget is mandatory")
+    private int budget;
+    private String iata;
 
     public int getJumps() {
         return jumps;
@@ -44,5 +47,21 @@ public class SearchDto {
 
     public void setCheckOut(Date checkOut) {
         this.checkOut = checkOut;
+    }
+
+    public int getBudget() {
+        return budget;
+    }
+
+    public void setBudget(int budget) {
+        this.budget = budget;
+    }
+
+    public String getIata() {
+        return iata;
+    }
+
+    public void setIata(String iata) {
+        this.iata = iata;
     }
 }
