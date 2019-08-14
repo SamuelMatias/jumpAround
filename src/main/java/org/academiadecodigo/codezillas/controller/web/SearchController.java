@@ -2,6 +2,7 @@ package org.academiadecodigo.codezillas.controller.web;
 
 import org.academiadecodigo.codezillas.DTO.SearchDto;
 import org.academiadecodigo.codezillas.controller.rest.flightAPI.ResultPOJO;
+import org.academiadecodigo.codezillas.exceptions.JumpAroundException;
 import org.academiadecodigo.codezillas.services.SearchService;
 import org.academiadecodigo.codezillas.services.SearchServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -49,7 +51,16 @@ public class SearchController {
             return "redirect:/search/";
         }
 
-        model.addAttribute("destinations", greatThings());
+        SearchDto dto = new SearchDto();
+        dto.setCountry("Portugal");
+        dto.setBudget(100);
+        dto.setIata("LIS");
+
+        try {
+            model.addAttribute("destinations", searchService.searchDestinations(dto));
+        } catch (JumpAroundException e) {
+            e.printStackTrace();
+        }
         return "result";
        //return searchService.makeRequest(searchDto);
     }

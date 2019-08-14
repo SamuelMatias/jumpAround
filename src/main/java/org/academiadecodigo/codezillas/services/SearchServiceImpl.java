@@ -26,45 +26,42 @@ public class SearchServiceImpl implements SearchService {
     //Budget
 
     @Override
-    public LinkedList<ResultPOJO> searchDestinations(SearchDto searchDetails) {
+    public List<ResultPOJO> searchDestinations(SearchDto searchDetails) throws JumpAroundException {
         SearchDto searchDto = searchDetails;
         searchDto.setIata(convertSearchDetails(searchDetails));
-       // DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd"); //"yyyy-mm-dd hh:mm:ss"
+        // DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd"); //"yyyy-mm-dd hh:mm:ss"
 
-        LinkedList<ResultPOJO> resultPOJOS = new LinkedList<>();
-        LinkedList<ResultPOJO> destinations = null;
+        List<ResultPOJO> resultPOJOS = new LinkedList<>();
+        List<ResultPOJO> destinations = null;
         for (Airports airport: Airports.values()){
 
-            try {
-                ResultPOJO pojo = dtoMerger.getResult("LIS", "OPO", "2019-09-03");
+                ResultPOJO pojo = dtoMerger.getResult("LIS", airport.name(), "2019-09-03");
                 if(pojo != null){
-                resultPOJOS.add(pojo);
+                    resultPOJOS.add(pojo);
                 }
-                destinations = filterDestinations(searchDto, resultPOJOS);
-                return destinations;
-            } catch (JumpAroundException e) {
-                e.printStackTrace();
-            }
+                //destinations = filterDestinations(searchDto, resultPOJOS);
+                //return destinations;
+
         }
+        return resultPOJOS;
 
 
         //LinkedList<ResultPOJO> resultPOJOS = flightAPI.getResponse(searchDto.getIata(), "   ", searchDto.getCheckIn());
         //LinkedList<ResultPOJO> resultPOJOS = flightAPI.getResponse(searchDto.getIata() + "/   /", searchDto.getCheckIn());
 
 
-        return destinations;
+        //return destinations;
     }
 
     private String convertSearchDetails(SearchDto searchDetails){
 
         String origin = searchDetails.getOrigin();
-        return iataConverter
-                .converter(
-                        origin);
+        return iataConverter.converter(origin);
+
     }
 
-    private LinkedList<ResultPOJO> filterDestinations(SearchDto searchDto, LinkedList<ResultPOJO> ResultPojos) {
-        Airports[] airports = Airports.values();
+    private List<ResultPOJO> filterDestinations(SearchDto searchDto, List<ResultPOJO> ResultPojos) {
+        //Airports[] airports = Airports.values();
         List<ResultPOJO> found = new ArrayList<>();
 
         for (ResultPOJO ResultPOJOObject: ResultPojos) {
@@ -72,9 +69,8 @@ public class SearchServiceImpl implements SearchService {
                 found.add(ResultPOJOObject);
             }
         }
-        ResultPojos.removeAll(found);
 
-        found = new ArrayList<>();
+/*        found = new ArrayList<>();
         for (ResultPOJO ResultPOJOObject: ResultPojos) {
             for (Airports airport: airports) {
                 if (!ResultPOJOObject.getiATAcode().equals(airport.name())){
@@ -82,9 +78,9 @@ public class SearchServiceImpl implements SearchService {
                 }
             }
         }
-        ResultPojos.removeAll(found);
+        ResultPojos.removeAll(found);*/
 
-        return ResultPojos;
+        return found;
 
     }
 

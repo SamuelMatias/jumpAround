@@ -61,8 +61,6 @@ public class FlightAPI {
         return locationList;
     }
 
-
-
     public QuoteDTO getQuotes(FlightPOJO pojo){
 
         QuoteDTO dto = null;

@@ -22,17 +22,20 @@ public class DTOMerger {
         FlightPOJO fpojo = flightAPI.getResponse(orgIATA, destIATA, date);
         List<LocationDTO> list = flightAPI.getDestinationList(fpojo);
         QuoteDTO quoteDTO = flightAPI.getQuotes(fpojo);
-        LocationDTO locationDTO = list.get(0);
-        pojo.setList(list);
-        try {
-            pojo.setPrice(Double.parseDouble(quoteDTO.getPrice()));
-            pojo.setDate(quoteDTO.getDate());
-            pojo.setCity(locationDTO.getCityName());
-            pojo.setCountry(locationDTO.getCountry());
-            pojo.setiATAcode(locationDTO.getiATACode());
-        } catch (NullPointerException np){
-            np.printStackTrace();
-            throw new JumpAroundException("RESULT POJO NULLPOINTER");
+
+        if (!list.isEmpty()){
+            LocationDTO locationDTO = list.get(0);
+            pojo.setList(list);
+            try {
+                pojo.setPrice(Double.parseDouble(quoteDTO.getPrice()));
+                pojo.setDate(quoteDTO.getDate());
+                pojo.setCity(locationDTO.getCityName());
+                pojo.setCountry(locationDTO.getCountry());
+                pojo.setiATAcode(locationDTO.getiATACode());
+            } catch (NullPointerException np) {
+                np.printStackTrace();
+                throw new JumpAroundException("RESULT POJO NULLPOINTER");
+            }
         }
         return pojo;
     }
