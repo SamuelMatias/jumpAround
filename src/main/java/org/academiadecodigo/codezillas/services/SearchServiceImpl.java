@@ -1,11 +1,13 @@
 package org.academiadecodigo.codezillas.services;
 
+import org.academiadecodigo.codezillas.controller.rest.DTOMerger;
 import org.academiadecodigo.codezillas.controller.rest.flightAPI.ResultPOJO;
 import org.academiadecodigo.codezillas.controller.rest.flightAPI.FlightAPI;
 import org.academiadecodigo.codezillas.controller.web.ResultController;
 import org.academiadecodigo.codezillas.converters.Airports;
 import org.academiadecodigo.codezillas.converters.LocationtoIataConverter;
 import org.academiadecodigo.codezillas.DTO.SearchDto;
+import org.academiadecodigo.codezillas.exceptions.JumpAroundException;
 import org.academiadecodigo.codezillas.persistence.model.Location;
 import org.academiadecodigo.codezillas.persistence.model.SearchDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,7 @@ import java.util.*;
 public class SearchServiceImpl implements SearchService {
 
     private LocationtoIataConverter iataConverter;
-    private FlightAPI flightAPI;
+    private DTOMerger dtoMerger;
     private SearchDto dto;
 
     //IATA Code - Origin location
@@ -33,7 +35,16 @@ public class SearchServiceImpl implements SearchService {
 
         LinkedList<ResultPOJO> resultPOJOS = new LinkedList<>();
         for (Airports airport: Airports.values()){
-            resultPOJOS.add(flightAPI.getResponse(searchDto.getIata(), airport.name(), dateFormat.format(searchDto.getCheckIn())));
+
+            try {
+                ResultPOJO pojo = dtoMerger.getResult(searchDto.getIata(), airport.name(), dateFormat.format(searchDto.getCheckIn()));
+                if(pojo != null){
+                resultPOJOS.add(pojo);
+                }
+
+            } catch (JumpAroundException e) {
+                e.printStackTrace();
+            }
         }
 
 

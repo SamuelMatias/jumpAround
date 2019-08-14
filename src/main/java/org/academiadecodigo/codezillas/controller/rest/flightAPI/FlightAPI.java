@@ -18,14 +18,14 @@ import java.util.List;
 public class FlightAPI {
     ObjectMapper mapper;
 
-    public FlightPOJO getResponse(/*String origin, String destination, String date*/){
+    public FlightPOJO getResponse(String origin, String destination, String date){
 
         mapper = new ObjectMapper();
         OkHttpClient client = new OkHttpClient();
         Response response;
         Request request = new Request.Builder()
 
-                .url(RESTUtils.SKYSCANNER_BASE + "LIS/CDG/2019-09-03")
+                .url(RESTUtils.SKYSCANNER_BASE + origin + "/" + destination + "/" + date)
                 .get()
                 .addHeader(RESTUtils.SKYSCANNER_HOSTHEADER, RESTUtils.SKYSCANNER_HOSTVALUE)
                 .addHeader(RESTUtils.SKYSCANNER_KEYHEADER, RESTUtils.SKYSCANNER_KEY)

@@ -13,11 +13,11 @@ public class DTOMerger {
 
     FlightAPI flightAPI;
 
-    public ResultPOJO getResult() throws JumpAroundException {
+    public ResultPOJO getResult(String orgIATA, String destIATA, String date) throws JumpAroundException {
 
         flightAPI = new FlightAPI();
         ResultPOJO pojo = new ResultPOJO();
-        FlightPOJO fpojo = flightAPI.getResponse();
+        FlightPOJO fpojo = flightAPI.getResponse(orgIATA, destIATA, date);
         List<LocationDTO> list = flightAPI.getDestinationList(fpojo);
         QuoteDTO quoteDTO = flightAPI.getQuotes(fpojo);
         LocationDTO locationDTO = list.get(0);
