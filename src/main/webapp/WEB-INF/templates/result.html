@@ -1,13 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-
-    <thymeleaf th:replace="header :: header"/>
-
+    <thymeleaf th:replace="header :: header" />
 </head>
-
 <body>
+<div class="container">
 
+    <div th:replace="action :: action"></div>
+
+    <h2>Customer List</h2>
+    <div th:if="${not #lists.isEmpty(destinations)}">
+        <table class="table table-striped">
+            <tr>
+                <th>Date</th>
+                <th>Destination</th>
+                <th>Price</th>
+            </tr>
+            <tr th:each="destinations : ${customers}">
+                <td th:text="${destinations.date}"></td>
+                <td th:text="${destinations.city} + ${destinations.country}"></td>
+                <td th:text="${destinations.price}"></td>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="col-sm-3">
+        <a class="btn btn-primary" th:href="@{/search/}">New Search</a>
+    </div>
+
+</div>
 </body>
 </html>
