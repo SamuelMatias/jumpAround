@@ -1,6 +1,6 @@
 package org.academiadecodigo.codezillas.controller.web;
 
-import org.academiadecodigo.codezillas.command.SearchDto;
+import org.academiadecodigo.codezillas.DTO.SearchDto;
 import org.academiadecodigo.codezillas.services.SearchService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;

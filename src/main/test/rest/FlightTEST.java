@@ -6,13 +6,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-import org.academiadecodigo.codezillas.controller.rest.DTO.DTOMerger;
-import org.academiadecodigo.codezillas.controller.rest.FlightAPI;
-import org.academiadecodigo.codezillas.controller.rest.ResultPOJO;
-import org.academiadecodigo.codezillas.controller.rest.pojos.FlightPOJO;
-import org.academiadecodigo.codezillas.controller.rest.DTO.LocationDTO;
-import org.academiadecodigo.codezillas.controller.rest.DTO.QuoteDTO;
-import org.academiadecodigo.codezillas.controller.rest.pojos.RESTUtils;
+import org.academiadecodigo.codezillas.controller.rest.DTOMerger;
+import org.academiadecodigo.codezillas.controller.rest.flightAPI.ResultPOJO;
+import org.academiadecodigo.codezillas.controller.rest.flightAPI.FlightPOJO;
+import org.academiadecodigo.codezillas.controller.rest.restDTO.LocationDTO;
+import org.academiadecodigo.codezillas.controller.rest.flightAPI.RESTUtils;
 import org.academiadecodigo.codezillas.exceptions.JumpAroundException;
 
 import java.io.IOException;

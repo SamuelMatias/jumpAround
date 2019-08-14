@@ -1,10 +1,8 @@
 package org.academiadecodigo.codezillas.services;
 
-import org.academiadecodigo.codezillas.command.SearchDto;
+import org.academiadecodigo.codezillas.DTO.SearchDto;
 import org.academiadecodigo.codezillas.persistence.model.Location;
-import org.academiadecodigo.codezillas.persistence.model.SearchDetails;
 
-import java.util.Date;
 import java.util.List;
 
 public class SearchServiceImpl implements SearchService {
