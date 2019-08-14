@@ -1,6 +1,7 @@
 package org.academiadecodigo.codezillas.controller.web;
 
 import org.academiadecodigo.codezillas.DTO.SearchDto;
+import org.academiadecodigo.codezillas.controller.rest.flightAPI.ResultPOJO;
 import org.academiadecodigo.codezillas.services.SearchService;
 import org.academiadecodigo.codezillas.services.SearchServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.LinkedList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/search")
@@ -44,6 +47,9 @@ public class SearchController {
         //return searchService.searchDestinations(searchDto);
        // return searchService.makeRequest(searchDto);
         return "index";
+        /*LinkedList<ResultPOJO> destinations = searchService.searchDestinations(searchDto);
+        // return searchService.makeRequest(searchDto);
+        return "redirect:/results/";*/
     }
 
 }
