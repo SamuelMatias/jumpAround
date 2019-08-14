@@ -6,8 +6,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+import org.academiadecodigo.codezillas.controller.rest.DTO.DTOMerger;
 import org.academiadecodigo.codezillas.controller.rest.FlightAPI;
-import org.academiadecodigo.codezillas.controller.rest.FlightPOJO;
+import org.academiadecodigo.codezillas.controller.rest.ResultPOJO;
+import org.academiadecodigo.codezillas.controller.rest.pojos.FlightPOJO;
 import org.academiadecodigo.codezillas.controller.rest.DTO.LocationDTO;
 import org.academiadecodigo.codezillas.controller.rest.DTO.QuoteDTO;
 import org.academiadecodigo.codezillas.controller.rest.pojos.RESTUtils;
@@ -18,14 +20,10 @@ import java.util.*;
 public class FlightTEST {
 
     public static void main(String[] args) {
-        FlightAPI api = new FlightAPI();
+        DTOMerger merger = new DTOMerger();
+        ResultPOJO pojo = merger.getResult();
 
-        Response response = api.getResponse();
-        ObjectMapper mapper = new ObjectMapper();
-        FlightPOJO pojo = api.getPojo(api.getResponse());
-
-        QuoteDTO dto = api.getQuotes(api.getResponse());
-        List<LocationDTO> list = api.getDestinationList(api.getResponse());
+        System.out.println(pojo.getDate() + "-" + pojo.getPrice() +" - " + pojo.getList().get(1).getCityName() + "-" + pojo.getList().get(1).getCountry());
 
     }
 
@@ -35,7 +33,7 @@ public class FlightTEST {
         ObjectMapper mapper = new ObjectMapper();
         Request request = new Request.Builder()
 
-                .url(RESTUtils.SKYSCANNER_BASE + "NYC/OPO/2019-09-03?inboundpartialdate=2019-12-01")
+                .url(RESTUtils.SKYSCANNER_BASE + "/OPO/2019-09-03?inboundpartialdate=2019-12-01")
                 .get()
                 .addHeader(RESTUtils.SKYSCANNER_HOSTHEADER, RESTUtils.SKYSCANNER_HOSTVALUE)
                 .addHeader(RESTUtils.SKYSCANNER_KEYHEADER, RESTUtils.SKYSCANNER_KEY)

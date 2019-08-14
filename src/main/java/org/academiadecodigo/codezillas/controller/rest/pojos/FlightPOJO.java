@@ -1,14 +1,10 @@
-package org.academiadecodigo.codezillas.controller.rest;
+package org.academiadecodigo.codezillas.controller.rest.pojos;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FlightPOJO implements Serializable {
