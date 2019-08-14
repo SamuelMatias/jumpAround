@@ -8,6 +8,7 @@ import com.squareup.okhttp.Response;
 import org.academiadecodigo.codezillas.controller.rest.DTO.LocationDTO;
 import org.academiadecodigo.codezillas.controller.rest.DTO.OutboundDTO;
 import org.academiadecodigo.codezillas.controller.rest.DTO.QuoteDTO;
+import org.academiadecodigo.codezillas.controller.rest.pojos.FlightPOJO;
 import org.academiadecodigo.codezillas.controller.rest.pojos.RESTUtils;
 
 import java.io.IOException;
@@ -17,7 +18,7 @@ import java.util.List;
 public class FlightAPI {
     ObjectMapper mapper;
 
-    public Response getResponse(/*String origin, String destination, String date*/){
+    public FlightPOJO getResponse(/*String origin, String destination, String date*/){
         mapper = new ObjectMapper();
         OkHttpClient client = new OkHttpClient();
         Response response;
@@ -31,7 +32,8 @@ public class FlightAPI {
 
         try {
             response = client.newCall(request).execute();
-            return response;
+            FlightPOJO pojo = mapper.readValue(response.body().bytes(), FlightPOJO.class);
+            return pojo;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -39,26 +41,14 @@ public class FlightAPI {
         return null;
     }
 
-    public FlightPOJO getPojo(Response response){
-        try {
-            FlightPOJO pojo = mapper.readValue(response.body().bytes(), FlightPOJO.class);
-            return pojo;
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            return null;
-        }
-    }
-
-    public List<LocationDTO> getDestinationList(Response response){
+    public List<LocationDTO> getDestinationList(FlightPOJO pojo){
 
         LinkedList<LocationDTO> locationList = new LinkedList<>();
         try {
             LocationDTO dto;
-            FlightPOJO pojo = mapper.readValue(response.body().bytes(), FlightPOJO.class);
             for (JsonNode jsonNode : pojo.getPlaces()) {
                 dto = mapper.readValue(jsonNode.toString(), LocationDTO.class);
-                System.out.println(dto.getiATACode() + " - " + dto.getCityName() + " - " + dto.getCountry());
+                //System.out.println(dto.getiATACode() + " - " + dto.getCityName() + " - " + dto.getCountry());
                 locationList.add(dto);
             }
             return locationList;
@@ -70,17 +60,15 @@ public class FlightAPI {
         return locationList;
     }
 
-    public QuoteDTO getQuotes(Response response){
+    public QuoteDTO getQuotes(FlightPOJO pojo){
 
         QuoteDTO dto = null;
-        LinkedList<QuoteDTO> locationList = new LinkedList<>();
         try {
-            FlightPOJO pojo = mapper.readValue(response.body().bytes(), FlightPOJO.class);
             for (JsonNode jsonNode : pojo.getQuotes()) {
                 dto = mapper.readValue(jsonNode.toString(), QuoteDTO.class);
                 OutboundDTO outbound = mapper.readValue(dto.getOutboundLeg().toString(), OutboundDTO.class);
                 dto.setDate(outbound.getDate());
-                System.out.println(dto.getPrice() + " - "+ dto.getDate());
+                //System.out.println(dto.getPrice() + " - "+ dto.getDate());
             }
             return dto;
 
