@@ -1,9 +1,0 @@
-org/academiadecodigo/codezillas/controller/rest/flightAPI/ResultPOJO.class
-org/academiadecodigo/codezillas/DTO/SearchDto.class
-org/academiadecodigo/codezillas/controller/rest/restDTO/QuoteDTO.class
-org/academiadecodigo/codezillas/controller/rest/flightAPI/FlightAPI.class
-org/academiadecodigo/codezillas/controller/rest/flightAPI/FlightPOJO.class
-org/academiadecodigo/codezillas/controller/rest/restDTO/LocationDTO.class
-org/academiadecodigo/codezillas/controller/rest/restDTO/OutboundDTO.class
-org/academiadecodigo/codezillas/controller/rest/flightAPI/RESTUtils.class
-org/academiadecodigo/codezillas/controller/rest/DTOMerger.class
