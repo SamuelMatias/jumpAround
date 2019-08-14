@@ -2,13 +2,63 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <thymeleaf th:replace="header :: header" />
+    <script modelType="application/javascript" async src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" modelType="text/css"/>
 </head>
 <body>
+<style>
+    body{
+
+        background: url("https://www-kiva-org.global.ssl.fastly.net/cms/sites/default/files/kivablog/impact_travel_by_kukzaa.jpg") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        align-self: center;
+        font-family: Futura;
+        font-size: medium;
+    }
+
+    #main{
+        margin: auto;
+    }
+    .center{
+        margin:auto;
+        width: 50%;
+        padding: 10px;
+        text-align: center;
+    }
+
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+    }
+    .control-label{
+        color: black;
+    }
+    .btn-primary{
+        align-self: center;
+    }
+
+    .newDIV{
+        font-size: xx-large;
+        width: 50%;
+        padding: 10px;
+        text-align: center;
+    }
+    .form-horizontal{
+
+    }
+
+
+</style>
 <div class="container">
 
     <div th:replace="action :: action"></div>
 
-    <h2>BITCHES BITCHES BITCHES BITCHES</h2>
+    <h2>Possible Destinations</h2>
     <!-- <div th:if="${not #lists.isEmpty(destinations)}"> -->
         <table class="table table-striped">
             <tr>
@@ -22,14 +72,13 @@
                 <td th:text="${destination.getDate()}"></td>
                 <td th:text="${destination.getPrice()}"></td>
             </tr>
+
         </table>
 
     </div>
 
     <div class="col-sm-3">
-        <a class="btn btn-primary" th:href="@{/search/}">New Search</a>
+            <button type="submit" name="action" value="search">New Jump</button>
     </div>
-
-</div>
 </body>
 </html>
