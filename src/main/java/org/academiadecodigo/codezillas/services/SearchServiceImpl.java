@@ -68,7 +68,7 @@ public class SearchServiceImpl implements SearchService {
         List<ResultPOJO> found = new ArrayList<>();
 
         for (ResultPOJO ResultPOJOObject: ResultPojos) {
-            if (searchDto.getBudget() > Integer.parseInt(ResultPOJOObject.getPrice())){
+            if (searchDto.getBudget() > ResultPOJOObject.getPrice()){
                 found.add(ResultPOJOObject);
             }
         }
@@ -86,5 +86,21 @@ public class SearchServiceImpl implements SearchService {
 
         return ResultPojos;
 
+    }
+
+    public LocationtoIataConverter getIataConverter() {
+        return iataConverter;
+    }
+
+    public void setIataConverter(LocationtoIataConverter iataConverter) {
+        this.iataConverter = iataConverter;
+    }
+
+    public DTOMerger getDtoMerger() {
+        return dtoMerger;
+    }
+
+    public void setDtoMerger(DTOMerger dtoMerger) {
+        this.dtoMerger = dtoMerger;
     }
 }

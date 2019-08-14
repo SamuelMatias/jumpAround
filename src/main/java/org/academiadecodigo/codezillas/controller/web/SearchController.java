@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -40,18 +42,35 @@ public class SearchController {
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "")
-    public String findDestination(@Valid @ModelAttribute("searchDto") SearchDto searchDto, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+    public String findDestination(@Valid @ModelAttribute("destinations") SearchDto searchDto, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("lastAction", "Make a new search");
             return "redirect:/search/";
         }
 
+        model.addAttribute("destinations", greatThings());
         return "result";
-        //model.addAttribute("destinations", searchService.searchDestinations(searchDto));
        //return searchService.makeRequest(searchDto);
     }
 
+    public List<ResultPOJO> greatThings(){
+
+        ArrayList<ResultPOJO> list = new ArrayList<>();
+
+        int count = 10;
+
+        for (int i = 0; i < count; i++) {
+            ResultPOJO pojo = new ResultPOJO();
+            pojo.setCity("New York");
+            pojo.setDate("03-06-1992");
+            pojo.setPrice(42069);
+            pojo.setiATAcode("NYC");
+            list.add(pojo);
+        }
+
+        return list;
+    }
 
 
 }

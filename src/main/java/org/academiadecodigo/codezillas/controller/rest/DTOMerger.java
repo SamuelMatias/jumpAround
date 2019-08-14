@@ -25,7 +25,7 @@ public class DTOMerger {
         LocationDTO locationDTO = list.get(0);
         pojo.setList(list);
         try {
-            pojo.setPrice(quoteDTO.getPrice());
+            pojo.setPrice(Double.parseDouble(quoteDTO.getPrice()));
             pojo.setDate(quoteDTO.getDate());
             pojo.setCity(locationDTO.getCityName());
             pojo.setCountry(locationDTO.getCountry());

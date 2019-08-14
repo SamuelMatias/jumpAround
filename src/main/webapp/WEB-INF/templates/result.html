@@ -9,18 +9,18 @@
     <div th:replace="action :: action"></div>
 
     <h2>BITCHES BITCHES BITCHES BITCHES</h2>
-    <div th:if="${not #lists.isEmpty(destinations)}">
+    <!-- <div th:if="${not #lists.isEmpty(destinations)}"> -->
         <table class="table table-striped">
             <tr>
                 <th>Date</th>
                 <th>Destination</th>
                 <th>Price</th>
             </tr>
-            <tr th:each="destinations : ${destinations}">
-                <td th:text="${destinations.getCity()}"></td>
-                <td th:text="${destinations.getiATAcode()}"></td>
-                <td th:text="${destinations.getDate()}"></td>
-                <td th:text="${destinations.getPrice()}"></td>
+            <tr th:each="destination : ${destinations}">
+                <td th:text="${destination.getCity()}"></td>
+                <td th:text="${destination.getiATAcode()}"></td>
+                <td th:text="${destination.getDate()}"></td>
+                <td th:text="${destination.getPrice()}"></td>
             </tr>
         </table>
 

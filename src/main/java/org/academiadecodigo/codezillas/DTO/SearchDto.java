@@ -16,7 +16,7 @@ public class SearchDto {
    // @NotBlank(message = "CheckOut is mandatory")
     private Date checkOut;
     //@NotBlank(message = "Budget is mandatory")
-    private int budget;
+    private double budget;
 
     private String country;
 
@@ -54,11 +54,11 @@ public class SearchDto {
         this.checkOut = checkOut;
     }
 
-    public int getBudget() {
+    public double getBudget() {
         return budget;
     }
 
-    public void setBudget(int budget) {
+    public void setBudget(double budget) {
         this.budget = budget;
     }
 
