@@ -2,13 +2,13 @@
 
 Team project for 24 hour Hackathon @ <A/C\_> 's 28th bootcamp: <CODEzillas\_>
 
-##Vision
+## Vision
  Enable travel for everyone by suggesting destinations within the consumer's budget.
 
-##Mission
+## Mission
  Provide tools for the community to exchange accommodation and facilitate travel.
 
-##Idea
+## Idea
 The app helps users search for destinations, flights and accommodation based on provided budget and dates.
 
 Community members can exchange accommodation with each other for Jumpy tokens.
