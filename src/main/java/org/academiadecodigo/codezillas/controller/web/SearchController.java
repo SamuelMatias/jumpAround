@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -21,6 +22,7 @@ import java.util.List;
 @RequestMapping("/search")
 public class SearchController {
 
+    @Autowired
     private SearchServiceImpl searchService;
 
     public SearchService getSearchService() {
@@ -33,23 +35,23 @@ public class SearchController {
 
     @RequestMapping(method = RequestMethod.GET, path = "")
     public String showSearch(@ModelAttribute("searchDto") SearchDto searchDto, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+
         return "index";
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "")
-    public String findDestination(@Valid @ModelAttribute("searchDto") SearchDto searchDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String findDestination(@Valid @ModelAttribute("searchDto") SearchDto searchDto, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("lastAction", "Make a new search");
             return "redirect:/search/";
         }
 
-        //return searchService.searchDestinations(searchDto);
-       // return searchService.makeRequest(searchDto);
-        return "index";
-        /*LinkedList<ResultPOJO> destinations = searchService.searchDestinations(searchDto);
-        // return searchService.makeRequest(searchDto);
-        return "redirect:/results/";*/
+        return "result";
+        //model.addAttribute("destinations", searchService.searchDestinations(searchDto));
+       //return searchService.makeRequest(searchDto);
     }
+
+
 
 }

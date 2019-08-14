@@ -2,14 +2,10 @@ package org.academiadecodigo.codezillas.services;
 
 import org.academiadecodigo.codezillas.controller.rest.DTOMerger;
 import org.academiadecodigo.codezillas.controller.rest.flightAPI.ResultPOJO;
-import org.academiadecodigo.codezillas.controller.rest.flightAPI.FlightAPI;
-import org.academiadecodigo.codezillas.controller.web.ResultController;
 import org.academiadecodigo.codezillas.converters.Airports;
 import org.academiadecodigo.codezillas.converters.LocationtoIataConverter;
 import org.academiadecodigo.codezillas.DTO.SearchDto;
 import org.academiadecodigo.codezillas.exceptions.JumpAroundException;
-import org.academiadecodigo.codezillas.persistence.model.Location;
-import org.academiadecodigo.codezillas.persistence.model.SearchDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,11 +13,13 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+@Component
 public class SearchServiceImpl implements SearchService {
 
+    @Autowired
     private LocationtoIataConverter iataConverter;
+    @Autowired
     private DTOMerger dtoMerger;
-    private SearchDto dto;
 
     //IATA Code - Origin location
 
@@ -31,17 +29,19 @@ public class SearchServiceImpl implements SearchService {
     public LinkedList<ResultPOJO> searchDestinations(SearchDto searchDetails) {
         SearchDto searchDto = searchDetails;
         searchDto.setIata(convertSearchDetails(searchDetails));
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd"); //"yyyy-mm-dd hh:mm:ss"
+       // DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd"); //"yyyy-mm-dd hh:mm:ss"
 
         LinkedList<ResultPOJO> resultPOJOS = new LinkedList<>();
+        LinkedList<ResultPOJO> destinations = null;
         for (Airports airport: Airports.values()){
 
             try {
-                ResultPOJO pojo = dtoMerger.getResult(searchDto.getIata(), airport.name(), dateFormat.format(searchDto.getCheckIn()));
+                ResultPOJO pojo = dtoMerger.getResult("LIS", "OPO", "2019-09-03");
                 if(pojo != null){
                 resultPOJOS.add(pojo);
                 }
-
+                destinations = filterDestinations(searchDto, resultPOJOS);
+                return destinations;
             } catch (JumpAroundException e) {
                 e.printStackTrace();
             }
@@ -50,7 +50,7 @@ public class SearchServiceImpl implements SearchService {
 
         //LinkedList<ResultPOJO> resultPOJOS = flightAPI.getResponse(searchDto.getIata(), "   ", searchDto.getCheckIn());
         //LinkedList<ResultPOJO> resultPOJOS = flightAPI.getResponse(searchDto.getIata() + "/   /", searchDto.getCheckIn());
-        LinkedList<ResultPOJO> destinations = filterDestinations(searchDto, resultPOJOS);
+
 
         return destinations;
     }
@@ -58,7 +58,9 @@ public class SearchServiceImpl implements SearchService {
     private String convertSearchDetails(SearchDto searchDetails){
 
         String origin = searchDetails.getOrigin();
-        return iataConverter.converter(origin);
+        return iataConverter
+                .converter(
+                        origin);
     }
 
     private LinkedList<ResultPOJO> filterDestinations(SearchDto searchDto, LinkedList<ResultPOJO> ResultPojos) {
@@ -84,13 +86,5 @@ public class SearchServiceImpl implements SearchService {
 
         return ResultPojos;
 
-    }
-
-    public SearchDto getDto() {
-        return dto;
-    }
-
-    public void setDto(SearchDto dto) {
-        this.dto = dto;
     }
 }

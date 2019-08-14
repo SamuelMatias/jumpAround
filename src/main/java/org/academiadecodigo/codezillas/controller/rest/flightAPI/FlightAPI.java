@@ -8,8 +8,6 @@ import com.squareup.okhttp.Response;
 import org.academiadecodigo.codezillas.controller.rest.restDTO.LocationDTO;
 import org.academiadecodigo.codezillas.controller.rest.restDTO.OutboundDTO;
 import org.academiadecodigo.codezillas.controller.rest.restDTO.QuoteDTO;
-import org.academiadecodigo.codezillas.controller.rest.flightAPI.FlightPOJO;
-import org.academiadecodigo.codezillas.controller.rest.flightAPI.RESTUtils;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -49,11 +47,13 @@ public class FlightAPI {
             LocationDTO dto;
             for (JsonNode jsonNode : pojo.getPlaces()) {
                 dto = mapper.readValue(jsonNode.toString(), LocationDTO.class);
-                //System.out.println(dto.getiATACode() + " - " + dto.getCityName() + " - " + dto.getCountry());
                 locationList.add(dto);
             }
             return locationList;
 
+        } catch (NullPointerException np){
+            np.printStackTrace();
+            return new LinkedList<>();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -76,7 +76,10 @@ public class FlightAPI {
             }
             return dto;
 
-        } catch (IOException e) {
+        }catch (NullPointerException np){
+            np.printStackTrace();
+            return new QuoteDTO();
+        }  catch (IOException e) {
             e.printStackTrace();
         }
 

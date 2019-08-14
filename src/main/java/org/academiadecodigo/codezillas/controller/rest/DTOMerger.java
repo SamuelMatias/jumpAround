@@ -6,9 +6,11 @@ import org.academiadecodigo.codezillas.controller.rest.restDTO.LocationDTO;
 import org.academiadecodigo.codezillas.controller.rest.restDTO.QuoteDTO;
 import org.academiadecodigo.codezillas.controller.rest.flightAPI.FlightPOJO;
 import org.academiadecodigo.codezillas.exceptions.JumpAroundException;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class DTOMerger {
 
     FlightAPI flightAPI;
