@@ -13,6 +13,7 @@ import org.academiadecodigo.codezillas.controller.rest.pojos.FlightPOJO;
 import org.academiadecodigo.codezillas.controller.rest.DTO.LocationDTO;
 import org.academiadecodigo.codezillas.controller.rest.DTO.QuoteDTO;
 import org.academiadecodigo.codezillas.controller.rest.pojos.RESTUtils;
+import org.academiadecodigo.codezillas.exceptions.JumpAroundException;
 
 import java.io.IOException;
 import java.util.*;
@@ -21,9 +22,15 @@ public class FlightTEST {
 
     public static void main(String[] args) {
         DTOMerger merger = new DTOMerger();
-        ResultPOJO pojo = merger.getResult();
+        try{
 
-        System.out.println(pojo.getDate() + "-" + pojo.getPrice() +" - " + pojo.getList().get(1).getCityName() + "-" + pojo.getList().get(1).getCountry());
+        ResultPOJO pojo = merger.getResult();
+        System.out.println(pojo.getDate() + "-" + pojo.getPrice() +" - " + pojo.getCity() + "-" + pojo.getCountry());
+
+        } catch (JumpAroundException jp){
+            jp.printStackTrace();
+        }
+
 
     }
 

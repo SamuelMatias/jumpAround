@@ -9,7 +9,7 @@ import java.util.List;
 
 public class SearchServiceImpl implements SearchService {
 
-    private IataConverter iataConverter;
+    //private IataConverter iataConverter;
     //IATA Code - Origin location
 
     //Budget
@@ -27,6 +27,6 @@ public class SearchServiceImpl implements SearchService {
     private String convertSearchDetails(SearchDto searchDetails){
 
         String origin = searchDetails.getOrigin();
-        return iataConverter.convert(origin);
+        return null;
     }
 }
