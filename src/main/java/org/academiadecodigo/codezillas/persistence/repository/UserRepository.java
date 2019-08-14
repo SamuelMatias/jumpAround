@@ -4,7 +4,7 @@ import org.academiadecodigo.codezillas.persistence.model.User;
 
 import java.util.HashMap;
 @org.springframework.stereotype.Repository
-public class UserRepository implements Repository<User>{
+public class UserRepository implements RepositoryInterface<User>{
 
     private HashMap<Integer, User> usersDB;
     private int usersCounter;

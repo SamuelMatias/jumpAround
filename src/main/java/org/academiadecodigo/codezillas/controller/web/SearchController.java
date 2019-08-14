@@ -2,7 +2,10 @@ package org.academiadecodigo.codezillas.controller.web;
 
 import org.academiadecodigo.codezillas.DTO.SearchDto;
 import org.academiadecodigo.codezillas.services.SearchService;
+import org.academiadecodigo.codezillas.services.SearchServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,23 +18,23 @@ import javax.validation.Valid;
 @RequestMapping("/search")
 public class SearchController {
 
-    private SearchService searchService;
+    private SearchServiceImpl searchService;
 
     public SearchService getSearchService() {
         return searchService;
     }
 
-    public void setSearchService(SearchService searchService) {
+    public void setSearchService(SearchServiceImpl searchService) {
         this.searchService = searchService;
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "")
-    public String showSearch(){
+    public String showSearch(@ModelAttribute("searchDto") SearchDto searchDto, BindingResult bindingResult, RedirectAttributes redirectAttributes){
         return "index";
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "")
-    public String findDestination(@Valid @ModelAttribute ("searchDto") SearchDto searchDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String findDestination(@Valid @ModelAttribute("searchDto") SearchDto searchDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("lastAction", "Make a new search");
@@ -40,7 +43,7 @@ public class SearchController {
 
         //return searchService.searchDestinations(searchDto);
        // return searchService.makeRequest(searchDto);
-        return null;
+        return "index";
     }
 
 }

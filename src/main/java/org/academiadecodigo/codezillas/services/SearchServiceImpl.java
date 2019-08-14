@@ -8,6 +8,8 @@ import org.academiadecodigo.codezillas.converters.LocationtoIataConverter;
 import org.academiadecodigo.codezillas.DTO.SearchDto;
 import org.academiadecodigo.codezillas.persistence.model.Location;
 import org.academiadecodigo.codezillas.persistence.model.SearchDetails;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.LinkedList;
@@ -17,6 +19,8 @@ public class SearchServiceImpl implements SearchService {
 
     private LocationtoIataConverter iataConverter;
     private FlightAPI flightAPI;
+    private SearchDto dto;
+
     //IATA Code - Origin location
 
     //Budget
@@ -59,5 +63,11 @@ public class SearchServiceImpl implements SearchService {
 
     }
 
+    public SearchDto getDto() {
+        return dto;
+    }
 
+    public void setDto(SearchDto dto) {
+        this.dto = dto;
+    }
 }

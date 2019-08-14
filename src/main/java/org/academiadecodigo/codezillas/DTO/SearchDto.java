@@ -1,19 +1,21 @@
 package org.academiadecodigo.codezillas.DTO;
 
+
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
+
 public class SearchDto {
 
-    @NotBlank(message = "Jumps is mandatory")
+   // @NotBlank(message = "Jumps is mandatory")
     private int jumps;
-    @NotBlank(message = "Origin is mandatory")
+   // @NotBlank(message = "Origin is mandatory")
     private String origin;
-    @NotBlank(message = "CheckIn is mandatory")
+    //@NotBlank(message = "CheckIn is mandatory")
     private Date checkIn;
-    @NotBlank(message = "CheckOut is mandatory")
+   // @NotBlank(message = "CheckOut is mandatory")
     private Date checkOut;
-    @NotBlank(message = "Budget is mandatory")
+    //@NotBlank(message = "Budget is mandatory")
     private int budget;
     private String iata;
 

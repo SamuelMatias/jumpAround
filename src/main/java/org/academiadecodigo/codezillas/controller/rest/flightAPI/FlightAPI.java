@@ -19,6 +19,7 @@ public class FlightAPI {
     ObjectMapper mapper;
 
     public FlightPOJO getResponse(/*String origin, String destination, String date*/){
+
         mapper = new ObjectMapper();
         OkHttpClient client = new OkHttpClient();
         Response response;
