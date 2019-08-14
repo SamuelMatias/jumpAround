@@ -62,8 +62,9 @@
     <!-- <div th:if="${not #lists.isEmpty(destinations)}"> -->
         <table class="table table-striped">
             <tr>
-                <th>Date</th>
                 <th>Destination</th>
+                <th>Airport</th>
+                <th>Date</th>
                 <th>Price</th>
             </tr>
             <tr th:each="destination : ${destinations}">

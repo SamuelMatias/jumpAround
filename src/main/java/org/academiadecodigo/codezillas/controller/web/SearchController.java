@@ -22,6 +22,8 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import static org.academiadecodigo.codezillas.converters.Airports.UDE;
+
 @Controller
 @RequestMapping("/search")
 public class SearchController {
@@ -53,16 +55,13 @@ public class SearchController {
 
         SearchDto dto = new SearchDto();
         dto.setCountry("Portugal");
-        dto.setBudget(100);
+        dto.setBudget(500);
         dto.setIata("LIS");
 
-        try {
-            model.addAttribute("destinations", searchService.searchDestinations(dto));
-        } catch (JumpAroundException e) {
-            e.printStackTrace();
-        }
+        model.addAttribute("destinations", greatThings());
+
         return "result";
-       //return searchService.makeRequest(searchDto);
+        //return searchService.makeRequest(searchDto);
     }
 
     public List<ResultPOJO> greatThings(){
@@ -71,15 +70,54 @@ public class SearchController {
 
         int count = 10;
 
-        for (int i = 0; i < count; i++) {
-            ResultPOJO pojo = new ResultPOJO();
-            pojo.setCity("New York");
-            pojo.setDate("03-06-1992");
-            pojo.setPrice(42069);
-            pojo.setiATAcode("NYC");
-            list.add(pojo);
-        }
+        ResultPOJO pojo = new ResultPOJO();
+        pojo.setCity("New York");
+        pojo.setDate("24-08-2019");
+        pojo.setPrice(339);
+        pojo.setiATAcode("NYC");
+        list.add(pojo);
 
+        pojo = new ResultPOJO();
+        pojo.setCity("Los Angeles");
+        pojo.setDate("24-08-2019");
+        pojo.setPrice(419.00);
+        pojo.setiATAcode("LAX");
+        list.add(pojo);
+
+        pojo = new ResultPOJO();
+        pojo.setCity("Terceira");
+        pojo.setDate("24-08-2019");
+        pojo.setPrice(99);
+        pojo.setiATAcode("TER");
+        list.add(pojo);
+
+        pojo = new ResultPOJO();
+        pojo.setCity("Ponta Delgada");
+        pojo.setDate("24-08-2019");
+        pojo.setPrice(97);
+        pojo.setiATAcode("PDL");
+        list.add(pojo);
+
+        pojo = new ResultPOJO();
+        pojo.setCity("La Coruña");
+        pojo.setDate("24-08-2019");
+        pojo.setPrice(149);
+        pojo.setiATAcode("LCG");
+        list.add(pojo);
+
+        pojo = new ResultPOJO();
+        pojo.setCity("Utrecht");
+        pojo.setDate("24-08-2019");
+        pojo.setPrice(169);
+        pojo.setiATAcode("UTC");
+        list.add(pojo);
+
+        pojo = new ResultPOJO();
+        pojo.setCity("Barcelona");
+        pojo.setDate("24-08-2019");
+        pojo.setPrice(145);
+        pojo.setiATAcode("BCN");
+        list.add(pojo);
         return list;
     }
 
