@@ -1,15 +1,15 @@
-package org.academiadecodigo.codezillas.controller.rest;
+package org.academiadecodigo.codezillas.controller.rest.flightAPI;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-import org.academiadecodigo.codezillas.controller.rest.DTO.LocationDTO;
-import org.academiadecodigo.codezillas.controller.rest.DTO.OutboundDTO;
-import org.academiadecodigo.codezillas.controller.rest.DTO.QuoteDTO;
-import org.academiadecodigo.codezillas.controller.rest.pojos.FlightPOJO;
-import org.academiadecodigo.codezillas.controller.rest.pojos.RESTUtils;
+import org.academiadecodigo.codezillas.controller.rest.restDTO.LocationDTO;
+import org.academiadecodigo.codezillas.controller.rest.restDTO.OutboundDTO;
+import org.academiadecodigo.codezillas.controller.rest.restDTO.QuoteDTO;
+import org.academiadecodigo.codezillas.controller.rest.flightAPI.FlightPOJO;
+import org.academiadecodigo.codezillas.controller.rest.flightAPI.RESTUtils;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -24,7 +24,7 @@ public class FlightAPI {
         Response response;
         Request request = new Request.Builder()
 
-                .url(RESTUtils.SKYSCANNER_BASE + "LIS/OPO/2019-09-03")
+                .url(RESTUtils.SKYSCANNER_BASE + "LIS/CDG/2019-09-03")
                 .get()
                 .addHeader(RESTUtils.SKYSCANNER_HOSTHEADER, RESTUtils.SKYSCANNER_HOSTVALUE)
                 .addHeader(RESTUtils.SKYSCANNER_KEYHEADER, RESTUtils.SKYSCANNER_KEY)
@@ -60,6 +60,8 @@ public class FlightAPI {
         return locationList;
     }
 
+
+
     public QuoteDTO getQuotes(FlightPOJO pojo){
 
         QuoteDTO dto = null;
@@ -67,8 +69,9 @@ public class FlightAPI {
             for (JsonNode jsonNode : pojo.getQuotes()) {
                 dto = mapper.readValue(jsonNode.toString(), QuoteDTO.class);
                 OutboundDTO outbound = mapper.readValue(dto.getOutboundLeg().toString(), OutboundDTO.class);
-                dto.setDate(outbound.getDate());
-                //System.out.println(dto.getPrice() + " - "+ dto.getDate());
+                String[] date = outbound.getDate().split("[A-Z]");
+                dto.setDate(date[0]);
+                System.out.println(dto.getPrice() + " - "+ dto.getDate());
             }
             return dto;
 

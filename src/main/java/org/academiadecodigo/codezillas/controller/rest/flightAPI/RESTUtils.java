@@ -1,4 +1,4 @@
-package org.academiadecodigo.codezillas.controller.rest.pojos;
+package org.academiadecodigo.codezillas.controller.rest.flightAPI;
 
 public class RESTUtils {
 

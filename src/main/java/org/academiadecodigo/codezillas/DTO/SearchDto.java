@@ -1,4 +1,4 @@
-package org.academiadecodigo.codezillas.command;
+package org.academiadecodigo.codezillas.DTO;
 
 import javax.validation.constraints.NotBlank;
 import java.util.Date;

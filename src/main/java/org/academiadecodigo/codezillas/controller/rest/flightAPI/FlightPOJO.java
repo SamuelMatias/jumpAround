@@ -1,4 +1,4 @@
-package org.academiadecodigo.codezillas.controller.rest.pojos;
+package org.academiadecodigo.codezillas.controller.rest.flightAPI;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,4 +1,4 @@
-package org.academiadecodigo.codezillas.controller.rest.DTO;
+package org.academiadecodigo.codezillas.controller.rest.restDTO;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
