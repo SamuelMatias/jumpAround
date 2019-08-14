@@ -3,9 +3,10 @@ package org.academiadecodigo.codezillas.persistence.repository;
 import org.academiadecodigo.codezillas.persistence.model.Location;
 import org.springframework.stereotype.Repository;
 
+
 import java.util.HashMap;
 @Repository
-public class LocationRepository implements Repository<Location> {
+public class LocationRepository implements RepositoryInterface<Location> {
 
     private HashMap<Integer, Location> locationDB;
     private int locationCounter;

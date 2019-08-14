@@ -1,6 +1,6 @@
 package org.academiadecodigo.codezillas.persistence.repository;
 
-public interface Repository<T> {
+public interface RepositoryInterface<T> {
 
     T findById(Integer id);
     void add(T t);

@@ -1,6 +1,7 @@
 package org.academiadecodigo.codezillas.services;
 
 import org.academiadecodigo.codezillas.command.SearchDto;
+import org.academiadecodigo.codezillas.converters.LocationtoIataConverter;
 import org.academiadecodigo.codezillas.persistence.model.Location;
 import org.academiadecodigo.codezillas.persistence.model.SearchDetails;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 public class SearchServiceImpl implements SearchService {
 
-    private IataConverter iataConverter;
+    private LocationtoIataConverter iataConverter;
     //IATA Code - Origin location
 
     //Budget
@@ -27,6 +28,6 @@ public class SearchServiceImpl implements SearchService {
     private String convertSearchDetails(SearchDto searchDetails){
 
         String origin = searchDetails.getOrigin();
-        return iataConverter.convert(origin);
+        return iataConverter.converter(origin);
     }
 }
