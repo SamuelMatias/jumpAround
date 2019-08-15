@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ResultPOJO {
 
-   private String price;
+   private double price;
    private String date;
    private String city;
    private String iATAcode;
@@ -39,11 +39,11 @@ public class ResultPOJO {
     private List<LocationDTO> list;
 
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

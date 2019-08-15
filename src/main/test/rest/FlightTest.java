@@ -11,24 +11,27 @@ import org.academiadecodigo.codezillas.controller.rest.flightAPI.ResultPOJO;
 import org.academiadecodigo.codezillas.controller.rest.flightAPI.FlightPOJO;
 import org.academiadecodigo.codezillas.controller.rest.restDTO.LocationDTO;
 import org.academiadecodigo.codezillas.controller.rest.flightAPI.RESTUtils;
+import org.academiadecodigo.codezillas.converters.LocationtoIataConverter;
 import org.academiadecodigo.codezillas.exceptions.JumpAroundException;
+import org.academiadecodigo.codezillas.services.SearchServiceImpl;
 
 import java.io.IOException;
 import java.util.*;
 
-public class FlightTEST {
+public class FlightTest {
 
     public static void main(String[] args) {
         DTOMerger merger = new DTOMerger();
+        SearchServiceImpl searchService = new SearchServiceImpl();
+        searchService.setDtoMerger(merger);
+        searchService.setIataConverter(new LocationtoIataConverter());
         try{
-
-        ResultPOJO pojo = merger.getResult();
+        ResultPOJO pojo = merger.getResult("LIS", "OPO", "2019-09-03");
         System.out.println(pojo.getDate() + "-" + pojo.getPrice() +" - " + pojo.getCity() + "-" + pojo.getCountry());
 
         } catch (JumpAroundException jp){
             jp.printStackTrace();
         }
-
 
     }
 
@@ -60,10 +63,6 @@ public class FlightTEST {
                 System.out.println(dto.getiATACode() + " - "+ dto.getCityName() + " - "+ dto.getCountry());
                 locationList.add(dto);
             }
-
-
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
